@@ -182,6 +182,59 @@ npm test
 npm run lint
 ```
 
+## Testing
+
+The library has comprehensive test coverage with both unit tests and integration tests.
+
+### Test Summary
+
+| Type | Tests | Description |
+|------|-------|-------------|
+| Unit tests | 186 | Fast tests with mocked Azure SDK |
+| Integration tests | 28 | Tests against actual Azure services |
+| **Total** | **214** | |
+
+### Unit Tests
+
+Unit tests use mocked Azure SDK clients and run without Azure credentials:
+
+```bash
+npm test
+```
+
+Modules covered:
+- `errors` - Custom error classes
+- `identity` - Authentication and credential management
+- `storage` - StorageAccount, Container, Table, BlobType utilities
+- `search` - SearchService, VectorSearch configurations
+- `ai` - AIService, deployments, OpenAI client
+- `document-intelligence` - DocumentIntelligenceService
+- `resources` - ResourceGroup management
+
+### Integration Tests
+
+Integration tests run against actual Azure services. Configure these environment variables:
+
+```bash
+AZURE_TENANT_ID=your-tenant-id
+AZURE_CLIENT_ID=your-client-id
+AZURE_CLIENT_SECRET=your-client-secret
+AZURE_SUBSCRIPTION_ID=your-subscription-id
+```
+
+Run integration tests:
+
+```bash
+npm test -- tests/integration.test.ts
+```
+
+Integration tests verify:
+- Subscription and resource group operations
+- Storage account and container access
+- Search service connectivity and index management
+- AI/OpenAI service access and deployments
+- Table storage operations
+
 ## License
 
 MIT
